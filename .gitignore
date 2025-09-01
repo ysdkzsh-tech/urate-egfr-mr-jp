@@ -47,3 +47,22 @@ po/*~
 
 # RStudio Connect folder
 rsconnect/
+
+# Stata
+*.smcl
+*.log
+*.dta
+*.gph
+
+# OS / Editor junk
+.DS_Store
+Thumbs.db
+~$*
+
+# Large or local only
+*.zip
+*.7z
+*.tar.gz
+
+# Do not commit any individual-level data
+data/raw_individual_level/
