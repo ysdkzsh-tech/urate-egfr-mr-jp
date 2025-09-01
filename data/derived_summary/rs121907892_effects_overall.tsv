@@ -1,0 +1,8 @@
+Cohort	sex	phenotype	model_covariates	A1/A2a	AF(A1)	Beta	95% CI	P value	N	scale_info
+ToMMo	Overall	eGFR	age1 + sex + PC1?PC11	A/G	0.023	0.0466	"[0.005, 0.089]"	0.026	47070	rank-based inverse-normalized
+J-MICC	Overall	eGFR	age1 + sex + PC1?PC10	A/G	0.021	0.071	"[-0.022, 0.163]"	0.14	10428	rank-based inverse-normalized
+J-MICC	male	eGFR	age1 + sex + PC1?PC10	A/G	0.021	0.1254	"[-0.010, 0.261]"	0.071	4737	rank-based inverse-normalized
+J-MICC	female	eGFR	age1 + sex + PC1?PC10	A/G	0.021	0.0219	"[-0.105, 0.149]"	0.737	5721	rank-based inverse-normalized
+J-MICC	Overall	SUA	age1 + sex + PC1?PC10	A/G	0.021	-1.564	"[-1.652, -1.476]"	< 0.001	10428	z-scored
+J-MICC	male	SUA	age1 + sex + PC1?PC10	A/G	0.021	-1.93	"[-2.077, -1.783]"	< 0.01	4737	z-scored
+J-MICC	female	SUA	age1 + sex + PC1?PC10	A/G	0.021	-1.29	"[-1.394, -1.186]"	< 0.01	5721	z-scored

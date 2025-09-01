@@ -1,0 +1,30 @@
+file	variable	type	unit	description	allowed_values_or_pattern
+MR_instruments_34.tsv	rsID	string	-	dbSNP identifier	^rs[0-9]+$
+MR_instruments_34.tsv	chr	integer	-	Chromosome (1-22)	1|2|...|22
+MR_instruments_34.tsv	pos	integer	bp	Base-pair position	[0-9]+
+MR_instruments_34.tsv	EA	string	allele	Effect allele	A|C|G|T
+MR_instruments_34.tsv	OA	string	allele	Other allele	A|C|G|T
+MR_instruments_34.tsv	EAF	float	proportion	Effect allele frequency	0–1
+MR_instruments_34.tsv	beta_exposure	float	SD change	Effect on SUA (z-scored)	-
+MR_instruments_34.tsv	se_exposure	float	SD change	SE of beta_exposure	-
+MR_instruments_34.tsv	p_exposure	float	-	P-value	0–1
+MR_instruments_34.tsv	N_exposure	integer	persons	Sample size	[0-9]+
+MR_instruments_34.tsv	source_exposure	string	-	Exposure source	J-MICC Study
+
+harmonized_JMICC_UA_ToMMo_eGFR.tsv	rsID	string	-	dbSNP ID	^rs[0-9]+$
+harmonized_JMICC_UA_ToMMo_eGFR.tsv	EA	string	allele	Harmonized effect allele	A|C|G|T
+harmonized_JMICC_UA_ToMMo_eGFR.tsv	beta_exposure	float	SD change	SUA effect (J-MICC)	-
+harmonized_JMICC_UA_ToMMo_eGFR.tsv	beta_outcome	float	SD change	eGFR effect (ToMMo)	-
+harmonized_JMICC_UA_ToMMo_eGFR.tsv	harmonization_flags	string	-	Flags (e.g., None / Allele flipped / Palindromic-removed)	-
+
+rs121907892_effects_overall.tsv	cohort	string	-	Cohort name	J-MICC|ToMMo
+rs121907892_effects_overall.tsv	sex	string	-	Sex stratum	overall|male|female
+rs121907892_effects_overall.tsv	phenotype	string	-	Outcome scale	eGFR|SUA
+rs121907892_effects_overall.tsv	model_covariates	string	-	Covariate set	e.g., age + sex + PC1–PC10
+rs121907892_effects_overall.tsv	beta	float	per-allele	Effect size	-
+rs121907892_effects_overall.tsv	se	float	-	Standard error	-
+rs121907892_effects_overall.tsv	p	float	-	P-value	0–1
+rs121907892_effects_overall.tsv	N	integer	persons	Sample size	[0-9]+
+
+rs121907892_demographics_by_genotype.tsv	genotype	string	-	Genotype	GG|GA  (AA suppressed if n<10)
+rs121907892_demographics_by_genotype.tsv	hypertension_prev	float	%	Prevalence	0–100

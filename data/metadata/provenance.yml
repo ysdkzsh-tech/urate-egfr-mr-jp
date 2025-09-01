@@ -1,0 +1,85 @@
+dataset: "Urate-eGFR MR Derived Summary (Japanese cohorts)"
+version: "1.0.0"
+date_released: "[2025-09-01]"
+maintainer:
+  name: "Kazushi Yasuda"
+  affiliation: "Nagoya University Graduate School of Medicine"
+  email: "yasuda.kazushi.v7@s.mail.nagoya-u.ac.jp "
+
+governance_and_privacy:
+  individual_level_data: "Not shared (J-MICC); governed by consent and IRB approvals."
+  small_cell_suppression: "Genotype AA for rs121907892 omitted when n < 10."
+  de_identification: "All shared files are aggregate/summary and contain no direct identifiers."
+
+sources:
+  exposure:
+    name: "J-MICC Study (SUA GWAS summary)"
+    description: "SUA residuals z-scored; adjusted for age, sex, PC1–PC10."
+    sample_size: 10428
+    notes: "Post-imputation variants INFO>0.8."
+  outcome:
+    name: "ToMMo/jMorp TGA000007 (eGFR GWAS summary)"
+    url: "https://jmorp.megabank.tohoku.ac.jp/gwas-studies/TGA000007"
+    sample_size: 47070
+    scale: "eGFR residuals rank-based inverse-normalized; adjusted for age, sex, PC1–PC11."
+  instruments_reference:
+    bbj_variant_source:
+      citation: "Sakaue et al., Nat Genet 2021;53:1415–1424 (Supplementary Table 4)."
+      note: "Initial 40 SNPs; filtered to 34 instruments (LD r2<0.001, QC, exclusion of rs671 and unavailable rs28855176)."
+
+mr_harmonization:
+  genome_build: "[GRCh37]"
+  allele_alignment: "Effect alleles harmonized across exposure/outcome."
+  harmonization_flags:
+    - "None"
+    - "Allele flipped"
+    - "Palindromic-removed (if MAF ~0.5)"
+  beta_sign_standardization: "Exposure beta kept as originally estimated; signs consistent with harmonized EA."
+
+derivatives:
+  files:
+    - path: "data/derived_summary/MR_instruments_34.tsv"
+      description: "34 SUA instruments (exposure-side)."
+    - path: "data/derived_summary/harmonized_JMICC_UA_ToMMo_eGFR.tsv"
+      description: "MR-ready harmonized table."
+    - path: "data/derived_summary/rs121907892_effects_overall.tsv"
+      description: "Modeled effect estimates by cohort/sex."
+    - path: "data/derived_summary/rs121907892_demographics_by_genotype.tsv"
+      description: "Group-level demographics by genotype (AA suppressed if n<10)."
+    - path: "data/derived_summary/loo_results.tsv"
+      description: "Leave-one-out MR outputs."
+
+software_environment:
+  plink2: "v2.00a3.7LM (24 Oct 2022)"
+  plink1: "v1.90b7 (16 Jan 2023)"
+  stata: "Stata/MP 16.1"
+  r:
+    version: "[4.4.1]"
+    packages:
+      MendelianRandomization: "[0.10.0]"
+      MRPRESSO: "[1.0]"
+    session_info_file: "code/R/sessionInfo.txt"
+
+qc_and_filters:
+  imputation_info_threshold: 0.8
+  ld_pruning_instruments: "r2 < 0.001 within 1 Mb"
+  exclusions:
+    - rs671 (pleiotropy/alcohol-related)
+    - rs28855176 (not available in outcome summary)
+  heterogeneity:
+    cochran_Q: "Reported in manuscript"
+    mr_presso_outliers: "n=12; distortion test P=0.78 (reported)"
+  palindromic_snps: "Removed if ambiguous at intermediate MAF"
+
+reproducibility:
+  code_repository: "[GitHub URL or DOI]"
+  data_archive_doi: "[Zenodo DOI]"
+  how_to_reproduce: |
+    1) Obtain public summaries (ToMMo TGA000007; BBJ instruments). 
+    2) Run PLINK pipelines as in code/plink/*.sh for QC/PCA/GWAS.
+    3) Generate phenotypes/covariates with Stata do-file (code/stata/main_analysis.do).
+    4) Run MR with code/R/mr_analysis.R; outputs correspond to files listed above.
+
+licensing:
+  code: "MIT"
+  data: "CC BY 4.0"
